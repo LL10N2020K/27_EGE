@@ -9,10 +9,10 @@ with open('28133_B.txt') as f:
 
         for y in range(120):
             if (x + y)%120 == 0:
-                if (x + k[y]) > sum(maxi):
-                    maxi = [k[y], x]
+                if k[y] > x:
+                    if (x + k[y]) > sum(maxi):
+                        maxi = [k[y], x]
 
         k[x%120] = max(x, k[x%120])
 
-    print(*maxi)
-    
+    print(*maxi) if maxi[0] != float('-inf') else print('00')
