@@ -1,32 +1,33 @@
 def spec(x):
-    s = 0
-    while x > 0:
-        s += x%3
-        x //= 3
-    return s == 12
+    if x < 0:
+        n = -x
+        s = 0
+        while n > 0:
+            s += n%3
+            n //= 3
+        return s == 12
+    return False
 
-with open('27-90b.txt') as f:
+with open('27-91a.txt') as f:
     N, K, D = map(int, f.readline().split())
 
-    T = [[0]*D]*K
-    Tall = [0]*K
-    s, m = 0, 0
-    special = 0
+    INF = 10**30
+    T = [[INF]*D for i in range(K)]
+    
+    special, s, m = 0, 0, 0
 
     for j in range(N):
         x = int(f.readline())
         s += x
-        special += spec(x)
         l = j + 1
+        special += spec(x)
         if special%K == 0 and l%D == 0:
             m = max(m, s)
-        if T[special%K][l%D] != 0:
+        if T[special%K][l%D] != INF:
             m = max(m, s - T[special%K][l%D])
-        if l%D == 0:
-            m = max(m, s - Tall[special%K])
+
         T[special%K][l%D] = min(T[special%K][l%D], s)
-        Tall[special%K] = min(Tall[special%K], s)
-        
+
     print(m)
 
 
