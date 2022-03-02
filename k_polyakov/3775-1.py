@@ -29,4 +29,31 @@ for x in t:
 print(max(x[0] for x in s if x[1] == 4 and x[0]%6 == 0))
         
 
+#ИЛИ ЕЩЁ ОДНА РЕАЛИЗАЦИЯ, ПРОСТО ПЕРЕБИРАЕМ ВСЕ ЧЕТВЁРКИ!
+ 
+f = open('27-56b.txt')
+n = int(f.readline())
+data = sorted(map(int, f.readlines()))[::-1]
+ 
+k = [0]*6
+t = []
+for j in range(6):
+    for x in data:
+        if x%6 == j:
+            k[j] += 1
+            t += [x]
+        if k[j] >= 4:
+            break
+ 
+s = 0
+for x in range(len(t) - 3):
+    for y in range(x + 1, len(t) - 2):
+        for z in range(y + 1, len(t) - 1):
+            for w in range(z + 1, len(t)):
+                if (t[x]+t[y]+t[z]+t[w])%6 == 0:
+                    s = max(s, t[x]+t[y]+t[z]+t[w])
+
+print(s)
+ 
+
 
