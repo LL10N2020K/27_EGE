@@ -55,5 +55,15 @@ for x in range(len(t) - 3):
 
 print(s)
  
+# И НАКОНЕЦ ЛУЧШАЯ РЕАЛИЗАЦИЯ
 
+
+data = sorted(list(map(int, open('27-56b.txt').readlines()))[1:])[::-1]
+ 
+s = [[0,0]]
+for x in data:
+    c = [y for y in s] + [[sm + x, ln + 1] for sm, ln in s if ln + 1 < 5] + [[x, 1]]
+    s = {x[0]%6: x for x in sorted(c)}.values()
+
+print(max(x[0] for x in s if x[1] == 4 and x[0]%6 == 0))
 
